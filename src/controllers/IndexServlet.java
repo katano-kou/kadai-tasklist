@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Message;
+import models.Task;
 import utils.DBUtil;
-
 
 /**
  * Servlet implementation class IndexServlet
@@ -35,12 +34,11 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        List<Message> taskss = em.createNamedQuery("getAllTasks", Message.class)
+        List<Task> tasks = em.createNamedQuery("getAllTasks", Task.class)
                                    .getResultList();
-        response.getWriter().append(Integer.valueOf(taskss.size()).toString());
+        response.getWriter().append(Integer.valueOf(tasks.size()).toString());
 
         em.close();
     }
-
 
 }
